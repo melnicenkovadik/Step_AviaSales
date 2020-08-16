@@ -1,7 +1,10 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Booking extends AbstractEntity<Booking> implements Serializable {
-    int id = 5;
+    private String userName;
+    private String userSurname;
+    private Flight flight;
 }

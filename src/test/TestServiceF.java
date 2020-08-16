@@ -8,6 +8,7 @@ import service.FlightService;
 
 import javax.lang.model.type.NullType;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestServiceF {
@@ -16,9 +17,11 @@ public class TestServiceF {
     public static void main(String[] args) {
         FlightService flightService = new FlightService();
         List<Flight> result = flightService.getFlights();
-        if (result != Object) {
-            System.out.println("Boroda");
+        if (result == Object) {
+            System.out.println("zbs");
 
+        } else {
+            System.out.println("Boroda");
         }
 
     }

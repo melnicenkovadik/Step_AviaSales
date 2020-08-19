@@ -1,11 +1,10 @@
 import dao.AbstractDao;
 import dao.BookingDao;
-import entity.Booking;
-import menu.Menu;
+import app.App;
 public class Main {
     public static void main(String[] args) {
-//        Menu menu = new Menu();
-//        menu.run();
+        App app = new App();
+        app.run();
 
         AbstractDao dao = new BookingDao();
 
@@ -13,4 +12,6 @@ public class Main {
         System.out.println(dao.getAll());
 
     }
+
+
 }

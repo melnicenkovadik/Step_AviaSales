@@ -1,18 +1,16 @@
 package service;
 
 import dao.AbstractDao;
-import dao.BookingDao;
 import dao.FlightDao;
-import entity.Booking;
 import entity.Flight;
 
-import java.time.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class FlightService {
-    AbstractDao<Booking> bookingDao = new BookingDao();
     AbstractDao<Flight> flightDao = new FlightDao();
 
     public List<Flight> getFlights() {

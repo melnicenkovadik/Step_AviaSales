@@ -13,6 +13,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements Dao<T> {
 
     public AbstractDao(String fileName) {
         this.fileName = fileName;
+        this.loadDataFromFile();
     }
 
     @Override
@@ -43,7 +44,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements Dao<T> {
                 }
             }
         } catch (IOException e) {
-            System.out.println("\nДанных нет :(");
+            System.out.println("\n" + fileName + " - Данных нет :(");
         }
     }
 

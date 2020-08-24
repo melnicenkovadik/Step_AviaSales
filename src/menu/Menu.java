@@ -6,7 +6,8 @@ public class Menu {
         THIRD("3. - Search and booking"),
         FOURTH("4. - Cancel booking"),
         FIFTH("5. - My flights"),
-        SIXTH("0. - Exit");
+        SIX("6. - Generate random data"),
+        ZERO("0. - Exit");
         String description;
         MenuList(String description){
             this.description = description;

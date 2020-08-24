@@ -5,14 +5,32 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Flight extends AbstractEntity<Flight> implements Serializable {
     private long id;
     private Instant dateTime;
     private int freePlaces;
     private String departure = "KIEV";
+    private Destinations destination;
 
     public Flight() {
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    }
+
+    public Flight(Instant dateTime, int freePlaces, Destinations destination) {
+        this.dateTime = dateTime;
+        this.freePlaces = freePlaces;
+        this.destination = destination;
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    }
+
+    public Destinations getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destinations destination) {
+        this.destination = destination;
     }
 
     public long getId() {
@@ -56,13 +74,15 @@ public class Flight extends AbstractEntity<Flight> implements Serializable {
         return Objects.hash(id);
     }
 
+
     @Override
     public String toString() {
         return "Flight{" +
                 "id=" + id +
-                ", dateTime=" + new SimpleDateFormat("dd.MM.yyyy | h:mm").format(dateTime) +
+                ", dateTime=" + dateTime +
                 ", freePlaces=" + freePlaces +
                 ", departure='" + departure + '\'' +
+                ", destination=" + destination +
                 '}';
     }
 }

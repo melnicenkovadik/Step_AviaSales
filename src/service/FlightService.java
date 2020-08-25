@@ -16,7 +16,7 @@ public class FlightService {
     public List<Flight> getFlights() {
         return this.flightDao.getAll()
                 .stream()
-                .filter(i -> Duration.between(Instant.now(), i.getDateTime()).toHours() <= 24)
+                .filter(i -> Duration.between(Instant.now(), i.getDateTime()).toMillis() <= 86400000 && Duration.between(Instant.now(), i.getDateTime()).toMillis() >= 0)
                 .collect(Collectors.toList());
     }
 
@@ -43,5 +43,9 @@ public class FlightService {
                 .stream()
                 .filter(i -> i.getId() == id)
                 .findFirst();
+    }
+
+    public void saveDataToFile() {
+        this.flightDao.saveDataToFile();
     }
 }

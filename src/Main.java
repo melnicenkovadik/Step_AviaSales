@@ -1,9 +1,10 @@
 import entity.Flight;
+import enums.Destinations;
 import menu.Menu;
 import service.FlightService;
 
-import java.util.Optional;
-import java.util.Scanner;
+import java.time.Instant;
+import java.util.*;
 
 public class Main {
 
@@ -13,7 +14,12 @@ public class Main {
     private static Menu menu = new Menu();
 
     public static void main(String[] args) {
+        Random rand = new Random();
+
+
         while (!exit) {
+            Scanner scanner = new Scanner(System.in);
+
             menu.showMenu();
             String answer = scanner.nextLine();
             switch (answer) {
@@ -29,7 +35,8 @@ public class Main {
                     System.out.print("Enter id: ");
                     long id = scanner.nextLong();
                     Flight flight = service.getFlightInfo(id);
-                    System.out.println(flight != null ? flight : "Данные отсутствуют.");
+                    System.out.println(flight != null ? flight : "\nДанные отсутствуют.");
+
                     break;
                 case "3":
                     System.out.println("\nSearch and booking");
@@ -40,15 +47,32 @@ public class Main {
                 case "5":
                     System.out.println("\nMy flights");
                     break;
+
                 case "6":
+                    System.out.println("\nGenerate random data...");
+                    System.out.print("Enter count of flights: ");
+                    int count = scanner.nextInt();
+
+                    List<Destinations> destinationsList = new ArrayList<>(Arrays.asList(Destinations.values()));
+
+                    for (int i = 0; i < count; i++) {
+                        Collections.shuffle(destinationsList);
+                        Flight newFlight = new Flight(Instant.now(), rand.nextInt() * 100, destinationsList.get(0));
+                        service.saveFlight(newFlight);
+                        System.out.println(newFlight);
+                    }
+
+                    break;
+                case "0":
                     exit = true;
+                    service.saveDataToFile();
+                    break;
+
+
+                default:
+                    System.out.println("\nОшибка пункта меню.");
                     break;
             }
         }
-    }
-
-    private static boolean exit() {
-        System.out.println("Press 0 to return to menu");
-        return scanner.nextLine().equals("0");
     }
 }

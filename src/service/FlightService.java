@@ -20,18 +20,17 @@ public class FlightService {
                 .collect(Collectors.toList());
     }
 
-    public Flight getFlightInfo(long id) {
+    public Optional<Flight> getFlightInfo(long id) {
         return this.flightDao.getAll().stream()
                 .filter(f -> f.getId() == id)
-                .findAny()
-                .orElse(null);
+                .findAny();
     }
 
-    public Flight saveFlight(Flight flight) {
+    public Optional<Flight> saveFlight(Flight flight) {
         if (flight != null) {
-            return this.flightDao.save(flight);
+            return Optional.ofNullable(this.flightDao.save(flight));
         }
-        return null;
+        return Optional.empty();
     }
 
     public boolean deleteFlight(Flight flight) {
